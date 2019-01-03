@@ -33,7 +33,7 @@ async function downloadDatabase() {
 
 async function saveDatabase() {
     const database = (await downloadDatabase()).val();
-    const serialized = JSON.stringify(database);
+    const serialized = JSON.stringify(database, null, 2);
 
     return writeFileAsync(path.resolve(__dirname, 'backups/backup.json'), serialized);
 }
