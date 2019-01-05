@@ -21,9 +21,11 @@ async function getConfig() {
 async function downloadDatabase() {
     const serviceAccount = JSON.parse(await getConfig());
 
+    const databaseURL = `https://${serviceAccount.project_id}.firebaseio.com`;
+
     admin.initializeApp({
       credential: admin.credential.cert(serviceAccount),
-      databaseURL: "https://amu-roboclub.firebaseio.com"
+      databaseURL
     });
     
     const db = admin.database();
@@ -35,7 +37,10 @@ async function saveDatabase() {
     const database = (await downloadDatabase()).val();
     const serialized = JSON.stringify(database, null, 2);
 
-    return writeFileAsync(path.resolve(__dirname, 'backups/backup.json'), serialized);
+    const date = new Date().toISOString();
+    const backupFile = `backups/backup_${ date }.json`;
+
+    return writeFileAsync(path.resolve(__dirname, backupFile), serialized);
 }
 
 saveDatabase()

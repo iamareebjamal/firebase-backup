@@ -2,7 +2,7 @@
   "name": "firebase-backup",
   "version": "1.0.0",
   "description": "Small utility to backup a firebase realtime database",
-  "main": "src/index.js",
+  "main": "index.js",
   "repository": "https://github.com/iamareebjamal/firebase-backup",
   "author": "iamareebjamal",
   "license": "MIT",
